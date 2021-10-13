@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src='main.js'></script>
+
+    <script>
+        $(document).ready(function(){
+        $("#b1").click(function(){
+         $(".rb").show();
+         $(".rb").attr("disabled",true);
+     });
+ });
+
+ function getanswers()
+ {
+     document.getElementById("useranswers").innerHTML = "";
+     var e = document.getElementsByTagName("input");
+     for(i=0 ; i<=e.length;i++)
+     {
+         if(e[i].type=="radio")
+         {
+             if(e[i].checked)
+             {
+                 document.getElementById("useranswers").innerHTML+="Q"+e[i].name + "The answers you are selected is : "+e[i].value+"<br>";
+             }
+         }
+     }
+ }
+  </script>
+  
+    </head>
+
+    <body>
+    <div>
+        {% for i in exam %}
+        <table>
+            <tr>
+                <td class="text-primary">{{i.id}} ) {{i.question}} ? </td>
+            </tr>
+            <tr>
+                <td> <input type="radio" class="rb" name={{i.id}} id="option1" value="{{i.option1}}">{{i.option1}}</td>
+            </tr>
+            <tr>
+                <td> <input type="radio" class="rb" name={{i.id}} id="option2" value="{{i.option2}}">{{i.option2}}</td>
+            </tr>
+            <tr>
+                <td> <input type="radio" class="rb" name={{i.id}} id="option3" value="{{i.option3}}">{{i.option3}}</td>
+            </tr>
+            <tr>
+                <td> <input type="radio" class="rb" name={{i.id}} id="option4" value="{{i.option4}}">{{i.option4}}</td>
+            </tr>
+            <tr>
+                <td><label id="corrans" class="rb" style="display: none;color:black"><b>{{i.corrans}}</b></label></td>
+            </tr>
+
+        </table>
+        {% endfor %}
+        <input type="submit" class="btn btn-success" value="submit" id="b1" onclick="getanswers()">
+        <br> 
+        <b id="useranswers"></b>
+
+
+    </div>
+      
+</body>
+</html>
